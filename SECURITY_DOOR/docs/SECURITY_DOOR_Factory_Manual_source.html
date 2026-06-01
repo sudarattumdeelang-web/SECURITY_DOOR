@@ -1,0 +1,1799 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <title>คู่มือระบบ SECURITY_DOOR</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 2cm 1.7cm 2cm 1.7cm;
+    }
+    body {
+      font-family: "TH Sarabun New", "Cordia New", "Tahoma", sans-serif;
+      font-size: 16pt;
+      line-height: 1.25;
+      color: #111827;
+    }
+    h1 {
+      font-size: 16pt;
+      text-align: center;
+      margin: 0 0 8pt 0;
+    }
+    h2 {
+      font-size: 16pt;
+      margin: 20pt 0 8pt 0;
+      border-bottom: 1px solid #6b7280;
+      padding-bottom: 3pt;
+    }
+    h3 {
+      font-size: 16pt;
+      margin: 14pt 0 5pt 0;
+    }
+    p {
+      margin: 4pt 0 6pt 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8pt 0 12pt 0;
+      font-size: 16pt;
+    }
+    th, td {
+      border: 1px solid #6b7280;
+      padding: 5pt 6pt;
+      vertical-align: top;
+    }
+    th {
+      background: #e5e7eb;
+      font-weight: bold;
+      text-align: left;
+    }
+    .cover-subtitle {
+      text-align: center;
+      font-size: 16pt;
+      margin-top: 8pt;
+    }
+    .meta {
+      text-align: center;
+      font-size: 16pt;
+      color: #374151;
+      margin-top: 18pt;
+    }
+    .note {
+      border: 1px solid #9ca3af;
+      background: #f9fafb;
+      padding: 8pt 10pt;
+      margin: 10pt 0;
+    }
+    .warning {
+      border: 1px solid #b91c1c;
+      background: #fef2f2;
+      padding: 8pt 10pt;
+      margin: 10pt 0;
+      color: #7f1d1d;
+    }
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 16pt;
+    }
+    pre {
+      border: 1px solid #9ca3af;
+      background: #f8fafc;
+      padding: 8pt;
+      white-space: pre-wrap;
+      line-height: 1.15;
+    }
+    .small {
+      font-size: 16pt;
+    }
+    .revision td, .revision th {
+      font-size: 16pt;
+    }
+    .diagram-pre {
+      font-size: 10.5pt;
+      line-height: 1.12;
+      background: #ffffff;
+    }
+    .diagram-title {
+      font-weight: bold;
+      margin-top: 12pt;
+    }
+    .factory-tag {
+      font-weight: bold;
+      color: #1f2937;
+    }
+    .editable-diagram {
+      font-family: Arial, Tahoma, sans-serif;
+      font-size: 6.2pt;
+      line-height: 1.05;
+      color: #111827;
+    }
+    .sheet-heading {
+      text-align: center;
+      margin: 0;
+    }
+    .sheet-title {
+      font-size: 15pt;
+      font-weight: bold;
+      letter-spacing: 0;
+      margin: 0;
+    }
+    .sheet-subtitle {
+      font-size: 6.8pt;
+      color: #4b5563;
+      margin: 0 0 4pt 0;
+    }
+    .drawing-frame {
+      border: 2px solid #111827;
+      padding: 5pt;
+      min-height: 510pt;
+      background: #ffffff;
+    }
+    .schematic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 6pt;
+      margin: 0;
+    }
+    .schematic-table th,
+    .schematic-table td {
+      border: 1px solid #374151;
+      padding: 2pt 3pt;
+      vertical-align: middle;
+    }
+    .schematic-table th {
+      background: #f3f4f6;
+      font-weight: bold;
+      text-align: center;
+    }
+    .schematic-sheet {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-family: Arial, Tahoma, sans-serif;
+      font-size: 6pt;
+      margin: 0;
+    }
+    .schematic-sheet td {
+      border: 0;
+      height: 26pt;
+      padding: 0 2pt;
+      vertical-align: middle;
+    }
+    .line-no {
+      width: 20pt;
+      text-align: center;
+      font-family: Consolas, monospace;
+      color: #374151;
+    }
+    .section-label {
+      font-size: 8.3pt;
+      font-weight: bold;
+      text-align: left;
+    }
+    .pin {
+      font-family: Consolas, "Courier New", monospace;
+      font-weight: bold;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .wire {
+      border-top: 1.2pt solid #111827 !important;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 6pt;
+      text-align: center;
+      vertical-align: top;
+    }
+    .wire span {
+      background: #ffffff;
+      padding: 0 2pt;
+    }
+    .wire-gap {
+      border-top: 1.2pt solid #111827 !important;
+    }
+    .devbox {
+      border: 1pt solid #374151;
+      background: #ffffff;
+      text-align: center;
+      padding: 2pt;
+    }
+    .devbox .tag {
+      font-size: 8.5pt;
+      font-weight: bold;
+      border-bottom: 1pt solid #374151;
+      margin: -2pt -2pt 2pt -2pt;
+      padding: 1pt 0;
+    }
+    .devbox .name {
+      font-size: 6.5pt;
+      margin-bottom: 1pt;
+    }
+    .devbox .note-line {
+      color: #4b5563;
+      font-size: 5.2pt;
+      text-align: left;
+    }
+    .terminal {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 6pt;
+      margin: 0;
+      background: #ffffff;
+    }
+    .terminal th,
+    .terminal td {
+      border: 1pt solid #374151;
+      padding: 1pt 2pt;
+      text-align: center;
+    }
+    .terminal th {
+      background: #ffffff;
+      font-size: 8pt;
+      font-weight: bold;
+    }
+    .small-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 5pt;
+      margin: 0;
+      background: #ffffff;
+    }
+    .small-table th,
+    .small-table td {
+      border: 1pt solid #374151;
+      padding: 1pt 2pt;
+      text-align: left;
+    }
+    .small-table th {
+      background: #f3f4f6;
+      font-weight: bold;
+    }
+    .control-notes {
+      border: 1pt solid #374151;
+      background: #ffffff;
+      padding: 2pt 3pt;
+      font-size: 5.5pt;
+    }
+    .control-notes .notes-title {
+      font-size: 8.5pt;
+      font-weight: bold;
+      border-bottom: 1pt solid #374151;
+      margin: -2pt -3pt 2pt -3pt;
+      padding: 1pt 3pt;
+    }
+    .mono {
+      font-family: Consolas, "Courier New", monospace;
+    }
+    .title-block {
+      width: 45%;
+      margin-left: auto;
+      font-size: 5.6pt;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    .diagram-canvas {
+      position: relative;
+      width: 780pt;
+      height: 520pt;
+      border: 2pt solid #111827;
+      margin: 0 auto;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    .inner-frame {
+      position: absolute;
+      left: 8pt;
+      top: 8pt;
+      width: 764pt;
+      height: 504pt;
+      border: 1pt solid #374151;
+    }
+    .abs {
+      position: absolute;
+      box-sizing: border-box;
+      font-family: Arial, Tahoma, sans-serif;
+      color: #111827;
+    }
+    .abs-text {
+      font-size: 5.5pt;
+      line-height: 1.05;
+    }
+    .abs-heading {
+      font-size: 8pt;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .abs-device {
+      border: 1pt solid #374151;
+      background: #ffffff;
+      text-align: center;
+      font-size: 5.6pt;
+      line-height: 1.08;
+      padding: 2pt;
+    }
+    .abs-device .tag {
+      display: block;
+      font-weight: bold;
+      font-size: 8pt;
+      border-bottom: 1pt solid #374151;
+      margin: -2pt -2pt 2pt -2pt;
+      padding: 1pt 0;
+    }
+    .abs-device .name {
+      display: block;
+      font-size: 6.2pt;
+      margin-bottom: 1pt;
+    }
+    .abs-device .small {
+      display: block;
+      color: #4b5563;
+      font-size: 5pt;
+      text-align: left;
+    }
+    .abs-line {
+      position: absolute;
+      border-top: 1.1pt solid #111827;
+      height: 0;
+      line-height: 0;
+      font-size: 0;
+    }
+    .abs-line-thick {
+      border-top-width: 1.6pt;
+    }
+    .abs-wire-label {
+      position: absolute;
+      background: #ffffff;
+      padding: 0 2pt;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 5.2pt;
+      font-weight: bold;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .abs-pin {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 5.2pt;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .abs-table {
+      position: absolute;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-family: Arial, Tahoma, sans-serif;
+      font-size: 4.7pt;
+      line-height: 1.05;
+      background: #ffffff;
+    }
+    .abs-table th,
+    .abs-table td {
+      border: 1pt solid #374151;
+      padding: 1pt 2pt;
+      vertical-align: middle;
+      text-align: left;
+    }
+    .abs-table th {
+      background: #f3f4f6;
+      font-weight: bold;
+    }
+    .abs-terminal {
+      position: absolute;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 5.2pt;
+      text-align: center;
+      background: #ffffff;
+    }
+    .abs-terminal th,
+    .abs-terminal td {
+      border: 1pt solid #374151;
+      padding: 1pt;
+      text-align: center;
+    }
+    .abs-terminal th {
+      font-family: Arial, Tahoma, sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+    }
+    .note-panel {
+      border: 1pt solid #374151;
+      background: #ffffff;
+      padding: 2pt 3pt;
+      font-size: 5pt;
+      line-height: 1.05;
+    }
+    .note-panel .note-title {
+      font-size: 8pt;
+      font-weight: bold;
+      border-bottom: 1pt solid #374151;
+      margin: -2pt -3pt 2pt -3pt;
+      padding: 1pt 3pt;
+    }
+    .title-block-panel {
+      position: absolute;
+      left: 455pt;
+      top: 454pt;
+      width: 310pt;
+      background: #ffffff;
+    }
+    .title-block {
+      width: 100%;
+      margin: 0;
+      font-size: 4.8pt;
+      line-height: 1;
+    }
+    .title-block th,
+    .title-block td {
+      padding: 2pt 3pt;
+    }
+  </style>
+</head>
+<body>
+  <!-- EDITABLE_DIAGRAM_START -->
+  <div class="editable-diagram">
+    <div class="diagram-canvas">
+      <div class="inner-frame"></div>
+
+      <div class="abs" style="left:205pt;top:12pt;width:370pt;text-align:center;">
+        <div class="sheet-title">E-01 ARDUINO I/O CONNECTION DIAGRAM</div>
+        <div class="sheet-subtitle">Simplified control wiring: one Arduino pin per horizontal line. Power distribution is shown separately.</div>
+      </div>
+
+      <div class="abs abs-pin" style="left:18pt;top:56pt;">01</div>
+      <div class="abs abs-pin" style="left:18pt;top:84pt;">02</div>
+      <div class="abs abs-pin" style="left:18pt;top:112pt;">03</div>
+      <div class="abs abs-pin" style="left:18pt;top:154pt;">04</div>
+      <div class="abs abs-pin" style="left:18pt;top:188pt;">05</div>
+      <div class="abs abs-pin" style="left:18pt;top:222pt;">06</div>
+      <div class="abs abs-pin" style="left:18pt;top:256pt;">07</div>
+      <div class="abs abs-pin" style="left:18pt;top:290pt;">08</div>
+      <div class="abs abs-pin" style="left:18pt;top:324pt;">09</div>
+      <div class="abs abs-pin" style="left:18pt;top:358pt;">10</div>
+      <div class="abs abs-pin" style="left:18pt;top:392pt;">11</div>
+      <div class="abs abs-pin" style="left:18pt;top:426pt;">12</div>
+      <div class="abs abs-pin" style="left:18pt;top:454pt;">13</div>
+      <div class="abs abs-pin" style="left:18pt;top:482pt;">14</div>
+
+      <div class="abs abs-heading" style="left:44pt;top:55pt;width:160pt;">5 VDC CONTROL POWER</div>
+      <div class="abs abs-device" style="left:46pt;top:78pt;width:74pt;height:47pt;">
+        <span class="tag">PS1</span>
+        <span class="name">5VDC POWER SUPPLY</span>
+        <span class="small">+5V output</span>
+        <span class="small">0V common</span>
+      </div>
+      <div class="abs-line" style="left:120pt;top:92pt;width:46pt;"></div>
+      <div class="abs-wire-label" style="left:124pt;top:86pt;">W101 +5V</div>
+      <div class="abs-device" style="left:166pt;top:82pt;width:36pt;height:28pt;">
+        <span class="tag">F1</span>
+        <span class="name">1A</span>
+      </div>
+      <div class="abs-line" style="left:202pt;top:92pt;width:45pt;"></div>
+      <table class="abs-terminal" style="left:246pt;top:78pt;width:86pt;height:42pt;">
+        <tr><th colspan="2">TB1</th></tr>
+        <tr><td>1</td><td>+5V</td></tr>
+        <tr><td>2</td><td>0V</td></tr>
+      </table>
+      <div class="abs-line" style="left:332pt;top:92pt;width:70pt;"></div>
+      <div class="abs-line" style="left:120pt;top:120pt;width:282pt;"></div>
+      <div class="abs-wire-label" style="left:124pt;top:114pt;">W102 0V</div>
+      <div class="abs abs-text mono" style="left:160pt;top:125pt;">GND</div>
+
+      <div class="abs abs-heading" style="left:250pt;top:66pt;width:210pt;">5V POWER DISTRIBUTION</div>
+      <table class="abs-table" style="left:250pt;top:84pt;width:192pt;">
+        <tr><th>FROM</th><th>TO</th><th>WIRE</th><th>NOTE</th></tr>
+        <tr><td>TB1-1</td><td>+5V bus</td><td>W101</td><td>+5V to U1/LCD/relay modules</td></tr>
+        <tr><td>TB1-2</td><td>0V bus</td><td>W102</td><td>0V common to U1/LCD/relay modules</td></tr>
+      </table>
+
+      <div class="abs abs-device" style="left:46pt;top:166pt;width:86pt;height:178pt;">
+        <span class="tag">U1</span>
+        <span class="name">ARDUINO UNO / NANO</span>
+        <span class="small">D2&nbsp;&nbsp;&nbsp; door sensor input</span>
+        <span class="small">D8&nbsp;&nbsp;&nbsp; green relay input</span>
+        <span class="small">D9&nbsp;&nbsp;&nbsp; red relay input</span>
+        <span class="small">D10&nbsp; buzzer driver input</span>
+        <span class="small">A4&nbsp;&nbsp;&nbsp; LCD SDA</span>
+        <span class="small">A5&nbsp;&nbsp;&nbsp; LCD SCL</span>
+        <span class="small">5V/GND from TB1</span>
+      </div>
+      <div class="abs abs-pin" style="left:135pt;top:184pt;">D2</div>
+      <div class="abs abs-pin" style="left:135pt;top:252pt;">D8</div>
+      <div class="abs abs-pin" style="left:135pt;top:286pt;">D9</div>
+      <div class="abs abs-pin" style="left:135pt;top:320pt;">D10</div>
+      <div class="abs abs-pin" style="left:135pt;top:354pt;">A4</div>
+      <div class="abs abs-pin" style="left:135pt;top:388pt;">A5</div>
+
+      <div class="abs abs-heading" style="left:170pt;top:174pt;width:115pt;">DOOR INPUT</div>
+      <div class="abs-line" style="left:132pt;top:189pt;width:145pt;"></div>
+      <div class="abs-wire-label" style="left:170pt;top:183pt;">W201&nbsp;&nbsp;D2</div>
+      <table class="abs-terminal" style="left:278pt;top:176pt;width:60pt;height:44pt;">
+        <tr><th colspan="2">TB2</th></tr>
+        <tr><td>1</td><td>D2</td></tr>
+        <tr><td>2</td><td>0V</td></tr>
+      </table>
+      <div class="abs-line" style="left:338pt;top:189pt;width:92pt;"></div>
+      <div class="abs-wire-label" style="left:340pt;top:204pt;">W202&nbsp;&nbsp;0V</div>
+      <div class="abs abs-device" style="left:430pt;top:174pt;width:76pt;height:47pt;">
+        <span class="tag">S1</span>
+        <span class="name">DOOR SENSOR</span>
+        <span class="small">dry contact</span>
+        <span class="small">closed door = D2 LOW</span>
+      </div>
+      <div class="abs abs-text mono" style="left:510pt;top:184pt;text-align:center;">TB2<br>1<br>2</div>
+
+      <div class="abs abs-heading" style="left:170pt;top:236pt;width:135pt;">OUTPUT SIGNALS</div>
+      <div class="abs-line" style="left:132pt;top:256pt;width:455pt;"></div>
+      <div class="abs-wire-label" style="left:178pt;top:250pt;">W401&nbsp;&nbsp;D8 -&gt; K1 IN</div>
+      <div class="abs abs-device" style="left:586pt;top:244pt;width:84pt;height:44pt;">
+        <span class="tag">K1</span>
+        <span class="name">GREEN RELAY INPUT</span>
+        <span class="small">IN = D8</span>
+        <span class="small">Active LOW</span>
+      </div>
+      <div class="abs abs-text mono" style="left:674pt;top:252pt;text-align:center;">E-02<br>K1</div>
+
+      <div class="abs-line" style="left:132pt;top:290pt;width:455pt;"></div>
+      <div class="abs-wire-label" style="left:178pt;top:284pt;">W402&nbsp;&nbsp;D9 -&gt; K2 IN</div>
+      <div class="abs abs-device" style="left:586pt;top:278pt;width:84pt;height:44pt;">
+        <span class="tag">K2</span>
+        <span class="name">RED RELAY INPUT</span>
+        <span class="small">IN = D9</span>
+        <span class="small">Active LOW</span>
+      </div>
+      <div class="abs abs-text mono" style="left:674pt;top:286pt;text-align:center;">E-02<br>K2</div>
+
+      <div class="abs-line" style="left:132pt;top:324pt;width:455pt;"></div>
+      <div class="abs-wire-label" style="left:178pt;top:318pt;">W501&nbsp;&nbsp;D10 -&gt; BD1 IN</div>
+      <div class="abs abs-device" style="left:586pt;top:312pt;width:84pt;height:44pt;">
+        <span class="tag">BD1</span>
+        <span class="name">BUZZER DRIVER</span>
+        <span class="small">IN = D10</span>
+        <span class="small">2000 Hz tone</span>
+      </div>
+      <div class="abs abs-text mono" style="left:674pt;top:320pt;text-align:center;">E-02<br>BD1</div>
+
+      <div class="abs abs-heading" style="left:170pt;top:344pt;width:126pt;">LCD I2C DISPLAY</div>
+      <div class="abs-line" style="left:132pt;top:358pt;width:230pt;"></div>
+      <div class="abs-wire-label" style="left:178pt;top:352pt;">W301&nbsp;&nbsp;A4 SDA</div>
+      <div class="abs-line" style="left:132pt;top:392pt;width:230pt;"></div>
+      <div class="abs-wire-label" style="left:178pt;top:386pt;">W302&nbsp;&nbsp;A5 SCL</div>
+      <div class="abs abs-device" style="left:362pt;top:350pt;width:82pt;height:60pt;">
+        <span class="tag">LCD1</span>
+        <span class="name">LCD 16x2 I2C</span>
+        <span class="small">VCC/GND from TB1</span>
+        <span class="small">SDA=A4, SCL=A5</span>
+        <span class="small">Address 0x27</span>
+      </div>
+
+      <div class="abs note-panel" style="left:635pt;top:164pt;width:118pt;height:76pt;">
+        <div class="note-title">CONTROL NOTES</div>
+        <div>1. D2 uses Arduino INPUT_PULLUP.</div>
+        <div>2. Door closed condition: D2 shorted to 0V.</div>
+        <div>3. Relay input modules are ACTIVE LOW.</div>
+        <div>4. D10 is signal only. Do not drive 24V buzzer directly.</div>
+        <div>5. Alarm delay in code: 5000 ms.</div>
+      </div>
+
+      <div class="abs abs-heading" style="left:46pt;top:432pt;width:170pt;">I/O ASSIGNMENT</div>
+      <table class="abs-table" style="left:46pt;top:446pt;width:220pt;">
+        <tr><th>PIN</th><th>WIRE</th><th>DEVICE</th><th>FUNCTION</th></tr>
+        <tr><td>D2</td><td>W201</td><td>S1</td><td>Door input, LOW=CLOSED</td></tr>
+        <tr><td>D8</td><td>W401</td><td>K1</td><td>Green relay input</td></tr>
+        <tr><td>D9</td><td>W402</td><td>K2</td><td>Red relay input</td></tr>
+        <tr><td>D10</td><td>W501</td><td>BD1</td><td>Buzzer driver input</td></tr>
+        <tr><td>A4</td><td>W301</td><td>LCD1</td><td>I2C SDA</td></tr>
+        <tr><td>A5</td><td>W302</td><td>LCD1</td><td>I2C SCL</td></tr>
+      </table>
+
+      <div class="abs abs-heading" style="left:275pt;top:432pt;width:170pt;">TERMINAL SUMMARY</div>
+      <table class="abs-table" style="left:275pt;top:446pt;width:170pt;">
+        <tr><th>TERM</th><th>SIGNAL</th><th>DESCRIPTION</th></tr>
+        <tr><td>TB1-1</td><td>+5V</td><td>Control power distribution</td></tr>
+        <tr><td>TB1-2</td><td>0V</td><td>Control common</td></tr>
+        <tr><td>TB2-1</td><td>D2</td><td>Door sensor signal</td></tr>
+        <tr><td>TB2-2</td><td>0V</td><td>Door sensor common</td></tr>
+      </table>
+
+      <!-- TITLE_BLOCK_START -->
+      <div class="title-block-panel">
+        <table class="schematic-table title-block">
+          <tr><th>PROJECT</th><td colspan="3">SECURITY_DOOR</td></tr>
+          <tr><th>TITLE</th><td colspan="3">ELECTRICAL SCHEMATIC DIAGRAM</td></tr>
+          <tr><th>DRAWING NO.</th><td>ED-SD-001</td><th>REV.</th><td>3.1</td></tr>
+          <tr><th>CODE REF.</th><td colspan="3">SECURITY_DOOR.ino</td></tr>
+          <tr><th>DATE</th><td>2026-05-30</td><th>SHEET</th><td>E-01 / 03</td></tr>
+          <tr><th>PREPARED BY</th><td colspan="3">Codex - Electrical Draft</td></tr>
+        </table>
+      </div>
+      <!-- TITLE_BLOCK_END -->
+    </div>
+  </div>
+  <!-- EDITABLE_DIAGRAM_END -->
+
+  <h1>คู่มือระบบตรวจสอบประตู SECURITY_DOOR</h1>
+  <p class="cover-subtitle">เอกสารอธิบายอุปกรณ์ โมดูล การทำงานของโค้ด และวิธีต่อสายสำหรับใช้งานในโรงงาน</p>
+  <p class="meta">อ้างอิงจากไฟล์โปรแกรม: <b>SECURITY_DOOR.ino</b><br>
+  วันที่จัดทำเอกสาร: 30 พฤษภาคม 2569</p>
+
+  <table class="revision">
+    <tr>
+      <th>สถานะเอกสาร</th>
+      <th>Revision</th>
+      <th>รายละเอียดการปรับปรุง</th>
+      <th>ผู้ใช้เอกสาร</th>
+    </tr>
+    <tr>
+      <td>Factory Use</td>
+      <td>Rev. 3.2</td>
+      <td>เพิ่มหน้า E-01 แบบแก้ไขได้ใน Word โดยใช้ตารางและข้อความแทนรูป PNG เพื่อให้แก้ wire number, terminal, device tag, notes และ title block ได้โดยตรง</td>
+      <td>ช่างไฟฟ้า, Maintenance, Engineer, ผู้ติดตั้งหน้างาน</td>
+    </tr>
+  </table>
+
+  <div class="warning">
+    <b>ข้อสำคัญด้านความปลอดภัย:</b> ระบบนี้เป็นระบบตรวจสอบสถานะและแจ้งเตือนประตู ไม่ใช่วงจร Safety Interlock ที่ผ่านมาตรฐานความปลอดภัยเครื่องจักร เช่น SIL หรือ Performance Level หากประตูนี้ใช้ป้องกันอันตรายจากเครื่องจักร ต้องมีอุปกรณ์ Safety Switch, Safety Relay หรือ Safety PLC ที่ได้รับการรับรองแยกต่างหาก
+  </div>
+
+  <h2>1. ขอบเขตของเอกสาร</h2>
+  <p>เอกสารนี้อธิบายการทำงานของโปรเจกต์ SECURITY_DOOR ตามโค้ดที่มีอยู่ในไฟล์ <b>SECURITY_DOOR.ino</b> โดยเน้นให้ช่างไฟฟ้า ช่างซ่อมบำรุง วิศวกรโรงงาน และผู้ติดตั้งสามารถเข้าใจระบบ นำไปต่อสาย ตรวจสอบ และทดสอบหน้างานได้</p>
+  <p>ข้อมูลฮาร์ดแวร์บางส่วนไม่ได้ระบุรุ่นไว้ในโค้ดโดยตรง จึงระบุเป็นแนวทางตามวงจรที่โค้ดต้องการ เช่น บอร์ด Arduino 5V, LCD I2C 16x2, รีเลย์โมดูลชนิด Active LOW และเซนเซอร์ประตูแบบหน้าสัมผัส หากอุปกรณ์จริงต่างจากนี้ให้ปรับตามคู่มือของอุปกรณ์จริงก่อนใช้งาน</p>
+
+  <h2>2. สรุประบบโดยรวม</h2>
+  <p>ระบบนี้ใช้ Arduino อ่านสถานะประตูจากเซนเซอร์ที่ขา D2 แล้วควบคุมไฟสัญญาณและเสียงเตือนดังนี้</p>
+  <table>
+    <tr>
+      <th>สถานะประตู</th>
+      <th>เงื่อนไขจากโค้ด</th>
+      <th>ไฟเขียว</th>
+      <th>ไฟแดง</th>
+      <th>บัซเซอร์</th>
+      <th>ข้อความบน LCD</th>
+    </tr>
+    <tr>
+      <td>ประตูปิด</td>
+      <td>D2 = LOW</td>
+      <td>ON</td>
+      <td>OFF</td>
+      <td>OFF</td>
+      <td>DR.CLOSE</td>
+    </tr>
+    <tr>
+      <td>ประตูเปิดไม่เกิน 5 วินาที</td>
+      <td>D2 = HIGH และเวลายังไม่ถึง 5000 ms</td>
+      <td>ON</td>
+      <td>OFF</td>
+      <td>OFF</td>
+      <td>DR.OPEN</td>
+    </tr>
+    <tr>
+      <td>ประตูเปิดค้างตั้งแต่ 5 วินาทีขึ้นไป</td>
+      <td>D2 = HIGH และเวลาถึง 5000 ms</td>
+      <td>OFF</td>
+      <td>ON</td>
+      <td>ON ที่ความถี่ 2000 Hz</td>
+      <td>DR.OPEN</td>
+    </tr>
+    <tr>
+      <td>ปิดประตูกลับ</td>
+      <td>D2 กลับเป็น LOW</td>
+      <td>ON</td>
+      <td>OFF</td>
+      <td>OFF</td>
+      <td>DR.CLOSE</td>
+    </tr>
+  </table>
+  <p>หมายเหตุ: โค้ดปัจจุบันแสดงบน LCD เพียงสถานะเปิด/ปิดของประตู ยังไม่ได้แยกข้อความ “รอเวลาเตือน” หรือ “ALARM” บนหน้าจอ</p>
+
+  <h2>3. รายการอุปกรณ์และหน้าที่ของโมดูล</h2>
+  <table>
+    <tr>
+      <th>อุปกรณ์/โมดูล</th>
+      <th>หน้าที่</th>
+      <th>รายละเอียดที่สัมพันธ์กับโค้ด</th>
+      <th>ข้อแนะนำสำหรับงานโรงงาน</th>
+    </tr>
+    <tr>
+      <td>Arduino Uno หรือบอร์ด Arduino 5V ที่เข้ากันได้</td>
+      <td>เป็นตัวควบคุมหลัก อ่านสถานะประตู คำนวณเวลา และสั่งเอาต์พุต</td>
+      <td>ใช้ขา D2, D8, D9, D10 และ I2C ผ่าน SDA/SCL</td>
+      <td>ติดตั้งในตู้ควบคุม มีแหล่งจ่าย 5V ที่นิ่ง และแยกจากโหลดกำลังสูง</td>
+    </tr>
+    <tr>
+      <td>Door Sensor / Magnetic Reed Switch</td>
+      <td>ตรวจจับว่าประตูปิดหรือเปิด</td>
+      <td>ต่อที่ D2 แบบ INPUT_PULLUP โดยโค้ดกำหนดว่า LOW = ประตูปิด</td>
+      <td>เลือกหน้าสัมผัสที่ปิดวงจรลง GND เมื่อประตูปิด หากเดินสายยาวควรใช้สายมีชีลด์หรือเดินแยกจากสายกำลัง</td>
+    </tr>
+    <tr>
+      <td>LCD 16x2 พร้อม I2C Backpack</td>
+      <td>แสดงสถานะระบบ</td>
+      <td>โค้ดใช้ Address 0x27 และจอขนาด 16 ตัวอักษร 2 บรรทัด</td>
+      <td>หากจอไม่ขึ้นให้ตรวจ Address เช่น 0x27 หรือ 0x3F และปรับ VR Contrast ที่หลังจอ</td>
+    </tr>
+    <tr>
+      <td>Relay Module สำหรับไฟเขียว</td>
+      <td>สั่งเปิด/ปิดไฟแสดงสถานะปกติ</td>
+      <td>ควบคุมจาก D8 และเป็น Active LOW: LOW = รีเลย์ ON</td>
+      <td>ใช้รีเลย์หรือ SSR ที่พิกัดแรงดัน/กระแสเหมาะกับหลอดไฟจริง และมีฟิวส์ป้องกันโหลด</td>
+    </tr>
+    <tr>
+      <td>Relay Module สำหรับไฟแดงหรือ Alarm Lamp</td>
+      <td>สั่งเปิดไฟเตือนเมื่อประตูเปิดค้างเกินเวลา</td>
+      <td>ควบคุมจาก D9 และเป็น Active LOW: LOW = รีเลย์ ON</td>
+      <td>แนะนำใช้ไฟสัญญาณ 24VDC แบบ Industrial Stack Light หรือ Beacon Light</td>
+    </tr>
+    <tr>
+      <td>Buzzer / Piezo Buzzer / Alarm Sounder</td>
+      <td>ส่งเสียงเตือนเมื่อประตูเปิดค้าง</td>
+      <td>ควบคุมจาก D10 ด้วยคำสั่ง tone(D10, 2000)</td>
+      <td>ถ้าเป็นบัซเซอร์อุตสาหกรรม 12V/24V ห้ามต่อเข้าขา Arduino โดยตรง ให้ขับผ่านทรานซิสเตอร์ รีเลย์ หรือโมดูลขับโหลด</td>
+    </tr>
+    <tr>
+      <td>Power Supply 5VDC และ 24VDC</td>
+      <td>จ่ายไฟให้วงจรควบคุมและโหลดภาคสนาม</td>
+      <td>Arduino และโมดูล 5V ใช้ 5VDC ส่วนไฟสัญญาณโรงงานมักใช้ 24VDC ผ่านหน้าสัมผัสรีเลย์</td>
+      <td>แยกฟิวส์วงจรควบคุมและโหลด ใช้เทอร์มินัล บัส 0V และสายกราวด์ตามมาตรฐานโรงงาน</td>
+    </tr>
+  </table>
+
+  <h2>4. ตาราง I/O ของระบบ</h2>
+  <table>
+    <tr>
+      <th>ขา Arduino</th>
+      <th>ชนิดสัญญาณ</th>
+      <th>ต่อกับ</th>
+      <th>สถานะตามโค้ด</th>
+      <th>หมายเหตุ</th>
+    </tr>
+    <tr>
+      <td>D2</td>
+      <td>Digital Input + Internal Pull-up</td>
+      <td>Door Sensor</td>
+      <td>LOW = ประตูปิด, HIGH = ประตูเปิด</td>
+      <td>ถ้าสายเซนเซอร์หลุด ขา D2 มีแนวโน้มเป็น HIGH และระบบจะมองว่าเปิดประตู</td>
+    </tr>
+    <tr>
+      <td>D8</td>
+      <td>Digital Output</td>
+      <td>Relay ไฟเขียว</td>
+      <td>LOW = ON, HIGH = OFF</td>
+      <td>เหมาะกับโมดูลรีเลย์ Active LOW</td>
+    </tr>
+    <tr>
+      <td>D9</td>
+      <td>Digital Output</td>
+      <td>Relay ไฟแดง/Alarm Lamp</td>
+      <td>LOW = ON, HIGH = OFF</td>
+      <td>โค้ดเปิดไฟแดงเมื่อประตูเปิดค้างเกิน 5 วินาที</td>
+    </tr>
+    <tr>
+      <td>D10</td>
+      <td>Digital Output / Tone Output</td>
+      <td>Buzzer</td>
+      <td>tone 2000 Hz เมื่อ Alarm</td>
+      <td>ใช้ขับบัซเซอร์ขนาดเล็กได้โดยตรงเท่านั้น โหลดใหญ่ต้องมีวงจรขับ</td>
+    </tr>
+    <tr>
+      <td>A4 / SDA</td>
+      <td>I2C Data</td>
+      <td>LCD I2C SDA</td>
+      <td>สื่อสารกับ LCD</td>
+      <td>สำหรับ Arduino Uno/Nano; บอร์ดอื่นตำแหน่ง SDA/SCL อาจต่างกัน</td>
+    </tr>
+    <tr>
+      <td>A5 / SCL</td>
+      <td>I2C Clock</td>
+      <td>LCD I2C SCL</td>
+      <td>สื่อสารกับ LCD</td>
+      <td>ตรวจสาย SDA/SCL หากจอไม่แสดงผล</td>
+    </tr>
+  </table>
+
+  <h2>5. หลักการทำงานของอุปกรณ์แต่ละส่วน</h2>
+  <h3>5.1 Door Sensor</h3>
+  <p>โค้ดตั้งขา D2 เป็น <b>INPUT_PULLUP</b> หมายความว่า Arduino จะดึงขาอินพุตไว้ที่ HIGH ภายในบอร์ดเอง เมื่อหน้าสัมผัสเซนเซอร์ปิดวงจรลง GND ค่าที่อ่านได้จะเป็น LOW ดังนั้นการต่อสายที่ต้องการคือ “ประตูปิด = หน้าสัมผัสเซนเซอร์ต่อ D2 ลง GND”</p>
+  <p>การต่อแบบนี้มีข้อดีคือไม่ต้องใช้ตัวต้านทาน Pull-up ภายนอก และหากสายเซนเซอร์ขาดหรือหลุด ระบบมีแนวโน้มอ่านค่าเป็น HIGH ซึ่งโค้ดมองว่าเป็นประตูเปิด แล้วจะเข้าสู่ Alarm หลังครบเวลา 5 วินาที</p>
+
+  <h3>5.2 Relay Module</h3>
+  <p>โค้ดกำหนด <b>RELAY_ON = LOW</b> และ <b>RELAY_OFF = HIGH</b> จึงต้องใช้รีเลย์โมดูลชนิด Active LOW หรือปรับโค้ดหากใช้โมดูล Active HIGH รีเลย์ฝั่งคอยล์/อินพุตต่อกับ Arduino ส่วนหน้าสัมผัส COM/NO/NC ใช้ตัดต่อไฟ 24VDC ของไฟสัญญาณ โดยควรใช้ NO สำหรับให้ไฟติดเฉพาะตอนรีเลย์สั่งทำงาน</p>
+
+  <h3>5.3 LCD I2C 16x2</h3>
+  <p>จอ LCD ใช้สื่อสารแบบ I2C ผ่านสาย 4 เส้น ได้แก่ VCC, GND, SDA และ SCL โค้ดสร้างออบเจกต์ด้วย <b>LiquidCrystal_I2C lcd(0x27, 16, 2)</b> หมายถึง Address 0x27 และจอ 16x2 หากจอจริงใช้ Address อื่น ต้องแก้เลข 0x27 ในโค้ด</p>
+
+  <h3>5.4 Buzzer</h3>
+  <p>เมื่อ Alarm ทำงาน โค้ดสั่ง <b>tone(BUZZER_PIN, 2000)</b> ทำให้ขา D10 ส่งสัญญาณสี่เหลี่ยมความถี่ประมาณ 2000 Hz เหมาะกับ Passive Piezo Buzzer หรือโมดูลเสียงที่รับสัญญาณลอจิก หากเป็นไซเรนหรือบัซเซอร์ 24VDC ให้ใช้วงจรขับ เช่น NPN/MOSFET หรือรีเลย์ พร้อมไดโอดกันแรงดันย้อนหากโหลดเป็นขดลวด</p>
+
+  <h2>6. วิธีต่อสายแบบแนะนำสำหรับงานโรงงาน</h2>
+  <div class="note">
+    ก่อนต่อสายจริงให้ตัดแหล่งจ่ายไฟทั้งหมด ล็อกเอาต์/แท็กเอาต์ตามขั้นตอนโรงงาน ตรวจสอบว่าแรงดันเป็น 0V และตรวจพิกัดอุปกรณ์ทุกตัวกับแบบไฟฟ้าหน้างาน
+  </div>
+
+  <h3>6.1 การต่อไฟเลี้ยง</h3>
+  <table>
+    <tr>
+      <th>จุดต่อ</th>
+      <th>การต่อสาย</th>
+      <th>คำแนะนำ</th>
+    </tr>
+    <tr>
+      <td>5VDC+</td>
+      <td>ต่อเข้าขา 5V ของ Arduino, VCC ของ LCD I2C และ VCC ของรีเลย์โมดูลฝั่งลอจิก</td>
+      <td>ใช้แหล่งจ่าย 5V ที่กระแสพอสำหรับ Arduino + LCD + รีเลย์ทุกตัว</td>
+    </tr>
+    <tr>
+      <td>0VDC / GND</td>
+      <td>ต่อร่วมกับ GND ของ Arduino, LCD, รีเลย์โมดูล และวงจรขับบัซเซอร์ถ้ามี</td>
+      <td>ใช้เทอร์มินัลบล็อก 0V แยกชัดเจน และขันแน่นด้วยหางปลา/เฟอร์รูล</td>
+    </tr>
+    <tr>
+      <td>24VDC+</td>
+      <td>ต่อผ่านฟิวส์ไปยัง COM ของรีเลย์สำหรับไฟเขียวและไฟแดง</td>
+      <td>ขนาดฟิวส์เลือกตามกระแสโหลดจริงของไฟสัญญาณ</td>
+    </tr>
+    <tr>
+      <td>24VDC 0V</td>
+      <td>ต่อกลับจากขั้วลบของไฟสัญญาณเข้าบัส 0V ของแหล่งจ่าย 24V</td>
+      <td>ถ้า 5V และ 24V แยกกัน ให้รวม 0V เฉพาะจุดที่จำเป็นตามแบบ และหลีกเลี่ยง Ground Loop</td>
+    </tr>
+  </table>
+
+  <h3>6.2 การต่อ Door Sensor เข้าขา D2</h3>
+  <table>
+    <tr>
+      <th>สาย</th>
+      <th>ต่อไปที่</th>
+      <th>ผลลัพธ์ที่ต้องได้</th>
+    </tr>
+    <tr>
+      <td>Sensor Contact ด้านที่ 1</td>
+      <td>Arduino D2</td>
+      <td>เป็นสัญญาณอ่านสถานะประตู</td>
+    </tr>
+    <tr>
+      <td>Sensor Contact ด้านที่ 2</td>
+      <td>Arduino GND</td>
+      <td>เมื่อประตูปิด หน้าสัมผัสต้องต่อ D2 ลง GND ทำให้ Serial Monitor แสดง D2 = 0</td>
+    </tr>
+  </table>
+  <p>หากติดตั้งแล้วประตูปิดแต่ระบบแสดง DR.OPEN ให้ตรวจว่าหน้าสัมผัสที่ใช้เป็น NO/NC ถูกต้องหรือไม่ หากต้องการแก้ด้วยซอฟต์แวร์ สามารถเปลี่ยนค่า <b>DOOR_CLOSED_SENSOR_STATE</b> ในโค้ดจาก LOW เป็น HIGH ได้ แต่ควรแก้การเลือกหน้าสัมผัสให้ตรงก่อน</p>
+
+  <h3>6.3 การต่อไฟเขียวผ่านรีเลย์ D8</h3>
+  <table>
+    <tr>
+      <th>จุดต่อ</th>
+      <th>การต่อสาย</th>
+    </tr>
+    <tr>
+      <td>Arduino D8</td>
+      <td>เข้าขา IN ของรีเลย์ไฟเขียว</td>
+    </tr>
+    <tr>
+      <td>Relay VCC/GND</td>
+      <td>ต่อกับ 5V/GND ของวงจรควบคุม</td>
+    </tr>
+    <tr>
+      <td>Relay COM</td>
+      <td>รับ +24VDC ผ่านฟิวส์</td>
+    </tr>
+    <tr>
+      <td>Relay NO</td>
+      <td>ต่อไปขั้วบวกของไฟเขียว</td>
+    </tr>
+    <tr>
+      <td>ขั้วลบไฟเขียว</td>
+      <td>ต่อกลับ 0V ของแหล่งจ่าย 24VDC</td>
+    </tr>
+  </table>
+
+  <h3>6.4 การต่อไฟแดงผ่านรีเลย์ D9</h3>
+  <table>
+    <tr>
+      <th>จุดต่อ</th>
+      <th>การต่อสาย</th>
+    </tr>
+    <tr>
+      <td>Arduino D9</td>
+      <td>เข้าขา IN ของรีเลย์ไฟแดงหรือ Alarm Lamp</td>
+    </tr>
+    <tr>
+      <td>Relay VCC/GND</td>
+      <td>ต่อกับ 5V/GND ของวงจรควบคุม</td>
+    </tr>
+    <tr>
+      <td>Relay COM</td>
+      <td>รับ +24VDC ผ่านฟิวส์</td>
+    </tr>
+    <tr>
+      <td>Relay NO</td>
+      <td>ต่อไปขั้วบวกของไฟแดง</td>
+    </tr>
+    <tr>
+      <td>ขั้วลบไฟแดง</td>
+      <td>ต่อกลับ 0V ของแหล่งจ่าย 24VDC</td>
+    </tr>
+  </table>
+
+  <h3>6.5 การต่อ LCD I2C</h3>
+  <table>
+    <tr>
+      <th>ขา LCD I2C</th>
+      <th>ต่อกับ Arduino Uno/Nano</th>
+    </tr>
+    <tr>
+      <td>VCC</td>
+      <td>5V</td>
+    </tr>
+    <tr>
+      <td>GND</td>
+      <td>GND</td>
+    </tr>
+    <tr>
+      <td>SDA</td>
+      <td>A4 หรือขา SDA ของบอร์ด</td>
+    </tr>
+    <tr>
+      <td>SCL</td>
+      <td>A5 หรือขา SCL ของบอร์ด</td>
+    </tr>
+  </table>
+
+  <h3>6.6 การต่อ Buzzer</h3>
+  <p><b>กรณีบัซเซอร์ขนาดเล็ก 5V:</b> ต่อขั้วบวกของบัซเซอร์เข้าขา D10 และขั้วลบเข้ากับ GND แต่ต้องตรวจว่ากระแสไม่เกินความสามารถของขา Arduino</p>
+  <p><b>กรณีบัซเซอร์/ไซเรนอุตสาหกรรม 12V หรือ 24V:</b> ให้ใช้ D10 เป็นสัญญาณควบคุมวงจรขับ เช่น NPN Transistor, Logic-level MOSFET หรือรีเลย์ ห้ามเอาโหลด 24V ต่อเข้าขา Arduino โดยตรง</p>
+  <pre>D10 -> R 1k -> Base/Gate ของวงจรขับ
+Emitter/Source -> GND
+โหลด Buzzer/Sounder ต่อกับแหล่งจ่ายที่เหมาะสม
+หากโหลดเป็นขดลวด ให้ใส่ Flyback Diode คร่อมโหลด</pre>
+
+  <h3>6.7 ผังการต่อสายแบบย่อ</h3>
+  <pre>Door Sensor:
+  D2 ----[ Contact closes when door is closed ]---- GND
+
+LCD I2C:
+  5V -> VCC, GND -> GND, A4/SDA -> SDA, A5/SCL -> SCL
+
+Green Lamp:
+  D8 -> Relay IN
+  +24V -> Fuse -> Relay COM -> Relay NO -> Green Lamp + -> Green Lamp - -> 24V 0V
+
+Red Alarm Lamp:
+  D9 -> Relay IN
+  +24V -> Fuse -> Relay COM -> Relay NO -> Red Lamp + -> Red Lamp - -> 24V 0V
+
+Buzzer:
+  D10 -> Small 5V piezo buzzer หรือวงจรขับสำหรับบัซเซอร์ 12/24V</pre>
+
+  <h3>6.8 Wiring Diagram ฉบับโรงงาน</h3>
+  <p><b>หมายเหตุสำหรับฉบับใช้งานในโรงงาน:</b> ไฟล์ Word ฉบับนี้มีหน้า Electrical Drawing แทรกก่อนคู่มือ 3 แผ่น ได้แก่ <b>E-01 Arduino I/O Connection Diagram</b>, <b>E-02 24VDC Alarm Output Schematic</b> และ <b>E-03 Terminal Strip / Field Wiring Schedule</b> เพื่อให้อ่านง่ายกว่าแบบรวมทุกสายไว้ในแผ่นเดียว</p>
+  <p>แผนภาพนี้จัดทำเป็นแบบใช้งานในโรงงาน โดยแยกวงจรเป็น 3 ส่วน ได้แก่ วงจรควบคุม 5VDC, วงจรโหลด 24VDC และอุปกรณ์ภาคสนามที่ติดตั้งบริเวณประตู ให้ถือหมายเลขอุปกรณ์และหมายเลขสายเป็นตัวอย่างมาตรฐาน สามารถปรับให้ตรงกับ Drawing Number และมาตรฐานสีสายของโรงงานได้</p>
+
+  <p class="diagram-title">6.8.1 Device Tag และหน้าที่อุปกรณ์</p>
+  <table>
+    <tr>
+      <th>Tag</th>
+      <th>อุปกรณ์</th>
+      <th>ตำแหน่งติดตั้ง</th>
+      <th>หน้าที่</th>
+      <th>หมายเหตุ</th>
+    </tr>
+    <tr>
+      <td class="factory-tag">PS1</td>
+      <td>Power Supply 5VDC</td>
+      <td>ตู้ควบคุม</td>
+      <td>จ่ายไฟให้ Arduino, LCD และภาคลอจิกของรีเลย์</td>
+      <td>ควรมีฟิวส์ฝั่ง Control</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">PS2</td>
+      <td>Power Supply 24VDC</td>
+      <td>ตู้ควบคุม</td>
+      <td>จ่ายไฟให้ไฟสัญญาณและอุปกรณ์ Alarm ภาคสนาม</td>
+      <td>ควรแยกฟิวส์โหลดแต่ละชุด</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">U1</td>
+      <td>Arduino Uno/Nano 5V</td>
+      <td>ตู้ควบคุม</td>
+      <td>ควบคุม logic ทั้งระบบ</td>
+      <td>โปรแกรม SECURITY_DOOR.ino</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">S1</td>
+      <td>Door Magnetic Sensor / Reed Switch</td>
+      <td>วงกบหรือขอบประตู</td>
+      <td>ส่งสัญญาณประตูปิด/เปิดเข้าขา D2</td>
+      <td>ประตูปิดต้องทำให้ D2 = LOW</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">LCD1</td>
+      <td>LCD 16x2 I2C</td>
+      <td>หน้าตู้หรือแผงควบคุม</td>
+      <td>แสดง DR.CLOSE / DR.OPEN</td>
+      <td>I2C Address 0x27</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">K1</td>
+      <td>Relay Module ไฟเขียว</td>
+      <td>ตู้ควบคุม</td>
+      <td>ตัดต่อไฟ H1 Green Lamp</td>
+      <td>Input D8, Active LOW</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">K2</td>
+      <td>Relay Module ไฟแดง</td>
+      <td>ตู้ควบคุม</td>
+      <td>ตัดต่อไฟ H2 Red Alarm Lamp</td>
+      <td>Input D9, Active LOW</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">H1</td>
+      <td>Green Pilot Lamp / Stack Light</td>
+      <td>หน้าประตูหรือจุดที่มองเห็นง่าย</td>
+      <td>แสดงสถานะปกติ</td>
+      <td>แนะนำ 24VDC Industrial Lamp</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">H2</td>
+      <td>Red Alarm Lamp / Beacon</td>
+      <td>หน้าประตูหรือจุดที่มองเห็นง่าย</td>
+      <td>แสดง Alarm เมื่อประตูเปิดค้างเกิน 5 วินาที</td>
+      <td>แนะนำ 24VDC Industrial Lamp</td>
+    </tr>
+    <tr>
+      <td class="factory-tag">BZ1</td>
+      <td>Buzzer / Sounder</td>
+      <td>หน้าประตูหรือจุดแจ้งเตือน</td>
+      <td>ส่งเสียง Alarm</td>
+      <td>ถ้าเป็น 24V ให้ใช้วงจรขับหรือรีเลย์</td>
+    </tr>
+  </table>
+
+  <p class="diagram-title">6.8.2 Overall Wiring Diagram</p>
+  <pre class="diagram-pre">FIELD AREA                                        CONTROL PANEL
+================================================================================
+
+  [S1 DOOR SENSOR]                                  [U1 ARDUINO]
+  Door closed contact                               +-----------------------+
+      TB2-1  ---------------- W201 ---------------->| D2  Door input        |
+      TB2-2  ---------------- W202 ---------------->| GND Sensor common     |
+                                                    |                       |
+  [LCD1 16x2 I2C]                                   | A4/SDA ---- W301 ---->| LCD SDA
+      VCC   ---------------- W101 ---------------->| 5V                    |
+      GND   ---------------- W102 ---------------->| GND                   |
+      SDA   ---------------- W301 ---------------->| A4/SDA                |
+      SCL   ---------------- W302 ---------------->| A5/SCL                |
+                                                    |                       |
+                                                    | D8  ---- W401 -----> K1 IN
+                                                    | D9  ---- W402 -----> K2 IN
+                                                    | D10 ---- W501 -----> BZ1 Driver IN
+                                                    +-----------------------+
+
+  [H1 GREEN LAMP 24VDC]                         [K1 RELAY ACTIVE LOW]
+      +  <---------------- W603 ---------------- NO
+      -  ----------------- W604 ---------------- 24V 0V
+                                                COM <--- W601 --- F2 --- +24VDC
+
+  [H2 RED ALARM LAMP 24VDC]                     [K2 RELAY ACTIVE LOW]
+      +  <---------------- W703 ---------------- NO
+      -  ----------------- W704 ---------------- 24V 0V
+                                                COM <--- W701 --- F3 --- +24VDC
+
+  [BZ1 BUZZER / SOUNDER]
+      Signal/Driver IN <------ W501 ------ Arduino D10
+      Power circuit follows actual buzzer voltage and driver module specification
+
+================================================================================
+สำคัญ: D2 ต้องเป็น LOW เมื่อประตูปิด และรีเลย์ K1/K2 ต้องเป็น Active LOW ตามโค้ด</pre>
+
+  <p class="diagram-title">6.8.3 Control Wiring Diagram: 5VDC / Arduino / Sensor / LCD / Relay Input</p>
+  <pre class="diagram-pre">PS1 5VDC CONTROL POWER
+  PS1 +5V  ---- F1 ---- TB1-1 ---- W101 ---- U1 Arduino 5V
+                         |-------- W111 ---- LCD1 VCC
+                         |-------- W121 ---- K1 Relay VCC
+                         |-------- W122 ---- K2 Relay VCC
+
+  PS1 0V   ------------ TB1-2 ---- W102 ---- U1 Arduino GND
+                         |-------- W112 ---- LCD1 GND
+                         |-------- W123 ---- K1 Relay GND
+                         |-------- W124 ---- K2 Relay GND
+                         |-------- W202 ---- S1 Door Sensor Common
+
+DOOR SENSOR INPUT
+  U1 D2  ---- TB2-1 ---- W201 ---- S1 Contact
+  U1 GND ---- TB2-2 ---- W202 ---- S1 Contact
+  Condition required by code:
+    Door closed = S1 contact closed to GND = D2 LOW
+    Door open   = S1 contact open           = D2 HIGH by INPUT_PULLUP
+
+LCD I2C
+  U1 A4/SDA ---- W301 ---- LCD1 SDA
+  U1 A5/SCL ---- W302 ---- LCD1 SCL
+
+RELAY INPUT
+  U1 D8  ---- W401 ---- K1 IN  Green Lamp Relay
+  U1 D9  ---- W402 ---- K2 IN  Red Alarm Relay
+  U1 D10 ---- W501 ---- BZ1 Driver IN or small 5V Piezo Buzzer</pre>
+
+  <p class="diagram-title">6.8.4 Load Wiring Diagram: 24VDC Lamp Circuit</p>
+  <pre class="diagram-pre">PS2 24VDC LOAD POWER
+
+GREEN NORMAL LAMP CIRCUIT
+  PS2 +24V ---- F2 ---- W601 ---- K1 COM
+  K1 NO  ------------- W603 ---- H1 Green Lamp +
+  H1 Green Lamp - ---- W604 ---- PS2 0V
+
+RED ALARM LAMP CIRCUIT
+  PS2 +24V ---- F3 ---- W701 ---- K2 COM
+  K2 NO  ------------- W703 ---- H2 Red Alarm Lamp +
+  H2 Red Lamp - ------ W704 ---- PS2 0V
+
+BUZZER 24V OPTION
+  PS2 +24V ---- F4 ---- W801 ---- BZ1 +
+  BZ1 -  ------ W802 ---- BD1 LOAD / MOSFET drain
+  BD1 0V ------ W803 ---- PS2 0V
+  Driver input -------- W501 from Arduino D10
+
+หมายเหตุ:
+  - ใช้ NO contact เพื่อให้ไฟติดเฉพาะตอน Arduino สั่งรีเลย์ทำงาน
+  - ถ้าใช้ Buzzer 24V ห้ามต่อโหลดเข้าขา D10 โดยตรง
+  - หากโหลดเป็นขดลวดต้องติด Flyback Diode หรือใช้อุปกรณ์กัน Surge ตามชนิดโหลด</pre>
+
+  <p class="diagram-title">6.8.5 Terminal Wiring Schedule</p>
+  <table>
+    <tr>
+      <th>Terminal</th>
+      <th>Wire No.</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Signal / Voltage</th>
+      <th>Remark</th>
+    </tr>
+    <tr>
+      <td>TB1-1</td>
+      <td>W101</td>
+      <td>PS1 +5V ผ่าน F1</td>
+      <td>Arduino 5V / LCD VCC / Relay VCC</td>
+      <td>+5VDC</td>
+      <td>Control power</td>
+    </tr>
+    <tr>
+      <td>TB1-2</td>
+      <td>W102</td>
+      <td>PS1 0V</td>
+      <td>Arduino GND / LCD GND / Relay GND</td>
+      <td>0VDC</td>
+      <td>Control common</td>
+    </tr>
+    <tr>
+      <td>TB2-1</td>
+      <td>W201</td>
+      <td>Arduino D2</td>
+      <td>S1 Door Sensor</td>
+      <td>Digital Input</td>
+      <td>Door closed = LOW</td>
+    </tr>
+    <tr>
+      <td>TB2-2</td>
+      <td>W202</td>
+      <td>Arduino GND</td>
+      <td>S1 Door Sensor Common</td>
+      <td>0VDC</td>
+      <td>Sensor common</td>
+    </tr>
+    <tr>
+      <td>Internal</td>
+      <td>W301</td>
+      <td>Arduino A4/SDA</td>
+      <td>LCD1 SDA</td>
+      <td>I2C Data</td>
+      <td>เดินสั้นและแยกจากสายกำลัง</td>
+    </tr>
+    <tr>
+      <td>Internal</td>
+      <td>W302</td>
+      <td>Arduino A5/SCL</td>
+      <td>LCD1 SCL</td>
+      <td>I2C Clock</td>
+      <td>เดินสั้นและแยกจากสายกำลัง</td>
+    </tr>
+    <tr>
+      <td>Internal</td>
+      <td>W401</td>
+      <td>Arduino D8</td>
+      <td>K1 Relay IN</td>
+      <td>Digital Output</td>
+      <td>Active LOW</td>
+    </tr>
+    <tr>
+      <td>Internal</td>
+      <td>W402</td>
+      <td>Arduino D9</td>
+      <td>K2 Relay IN</td>
+      <td>Digital Output</td>
+      <td>Active LOW</td>
+    </tr>
+    <tr>
+      <td>Internal</td>
+      <td>W501</td>
+      <td>Arduino D10</td>
+      <td>BD1 Driver IN</td>
+      <td>Tone Output 2000 Hz</td>
+      <td>ใช้วงจรขับสำหรับโหลด 12/24V</td>
+    </tr>
+    <tr>
+      <td>TB4-1</td>
+      <td>W801</td>
+      <td>F4 / PS2 +24V</td>
+      <td>BZ1 +</td>
+      <td>+24VDC</td>
+      <td>Buzzer positive supply</td>
+    </tr>
+    <tr>
+      <td>TB4-2</td>
+      <td>W802</td>
+      <td>BZ1 -</td>
+      <td>BD1 LOAD</td>
+      <td>Switched 0V</td>
+      <td>BD1 switches the buzzer negative return</td>
+    </tr>
+    <tr>
+      <td>TB4-3</td>
+      <td>W803</td>
+      <td>BD1 0V</td>
+      <td>PS2 0V</td>
+      <td>0V Common</td>
+      <td>Common required unless BD1 is isolated</td>
+    </tr>
+    <tr>
+      <td>TB3-1</td>
+      <td>W601</td>
+      <td>PS2 +24V ผ่าน F2</td>
+      <td>K1 COM</td>
+      <td>+24VDC</td>
+      <td>Green lamp supply</td>
+    </tr>
+    <tr>
+      <td>TB3-2</td>
+      <td>W603</td>
+      <td>K1 NO</td>
+      <td>H1 Green Lamp +</td>
+      <td>Switched +24VDC</td>
+      <td>ไฟเขียวติดเมื่อประตูปิดหรือเปิดยังไม่ครบเวลา Alarm</td>
+    </tr>
+    <tr>
+      <td>TB3-4</td>
+      <td>W604</td>
+      <td>H1 Green Lamp -</td>
+      <td>PS2 0V</td>
+      <td>0VDC</td>
+      <td>Load return</td>
+    </tr>
+    <tr>
+      <td>TB3-3</td>
+      <td>W701</td>
+      <td>PS2 +24V ผ่าน F3</td>
+      <td>K2 COM</td>
+      <td>+24VDC</td>
+      <td>Red lamp supply</td>
+    </tr>
+    <tr>
+      <td>TB3-5</td>
+      <td>W703</td>
+      <td>K2 NO</td>
+      <td>H2 Red Alarm Lamp +</td>
+      <td>Switched +24VDC</td>
+      <td>ติดเมื่อประตูเปิดค้างเกิน 5 วินาที</td>
+    </tr>
+    <tr>
+      <td>TB3-6</td>
+      <td>W704</td>
+      <td>H2 Red Alarm Lamp -</td>
+      <td>PS2 0V</td>
+      <td>0VDC</td>
+      <td>Load return</td>
+    </tr>
+  </table>
+
+  <p class="diagram-title">6.8.6 Wire Color และข้อกำหนดการเดินสาย</p>
+  <table>
+    <tr>
+      <th>สัญญาณ</th>
+      <th>สีสายที่แนะนำ</th>
+      <th>ขนาดสายที่แนะนำ</th>
+      <th>ข้อกำหนดงานติดตั้ง</th>
+    </tr>
+    <tr>
+      <td>+5VDC Control</td>
+      <td>แดง</td>
+      <td>0.5 - 0.75 sq.mm</td>
+      <td>เดินในรางสาย Control แยกจาก 24V Load และสาย AC</td>
+    </tr>
+    <tr>
+      <td>0VDC Control</td>
+      <td>ดำหรือน้ำเงิน</td>
+      <td>0.5 - 0.75 sq.mm</td>
+      <td>รวม Common ที่บัส 0V ในตู้ควบคุม</td>
+    </tr>
+    <tr>
+      <td>Digital Input Sensor</td>
+      <td>ขาวหรือเหลือง</td>
+      <td>0.5 - 0.75 sq.mm</td>
+      <td>ถ้าเดินไกลหรือใกล้มอเตอร์/อินเวอร์เตอร์ ให้ใช้สาย Shield และต่อ Shield ลงกราวด์ด้านตู้ด้านเดียว</td>
+    </tr>
+    <tr>
+      <td>I2C LCD</td>
+      <td>ตามมาตรฐานตู้</td>
+      <td>0.2 - 0.5 sq.mm</td>
+      <td>ควรเดินสั้นที่สุด ไม่เดินคู่กับสายกำลังหรือสายรีเลย์โหลด</td>
+    </tr>
+    <tr>
+      <td>+24VDC Load</td>
+      <td>น้ำตาลหรือแดง</td>
+      <td>0.75 - 1.0 sq.mm หรือตามโหลดจริง</td>
+      <td>ผ่านฟิวส์ก่อนเข้าหน้าสัมผัสรีเลย์ทุกวงจร</td>
+    </tr>
+    <tr>
+      <td>24V 0V Load</td>
+      <td>น้ำเงินหรือดำ</td>
+      <td>0.75 - 1.0 sq.mm หรือตามโหลดจริง</td>
+      <td>แยกบัส 0V Load ให้ตรวจซ่อมง่าย</td>
+    </tr>
+    <tr>
+      <td>PE / Ground</td>
+      <td>เขียว-เหลือง</td>
+      <td>ตามมาตรฐานโรงงาน</td>
+      <td>ต่อลง Ground Bar ของตู้ ห้ามใช้แทน 0VDC</td>
+    </tr>
+  </table>
+
+  <p class="diagram-title">6.8.7 Checklist ตรวจรับ Wiring ก่อนจ่ายไฟ</p>
+  <table>
+    <tr>
+      <th>รายการตรวจ</th>
+      <th>เกณฑ์ผ่าน</th>
+      <th>ผลตรวจ</th>
+    </tr>
+    <tr>
+      <td>ตรวจขั้ว PS1 5V และ PS2 24V</td>
+      <td>ขั้ว + และ 0V ถูกต้อง ไม่มีลัดวงจร</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ตรวจ D2 กับ GND ผ่าน S1</td>
+      <td>ประตูปิดต้องวัดต่อถึง GND, ประตูเปิดต้องไม่ต่อถึง GND</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ตรวจ K1/K2 เป็น Active LOW</td>
+      <td>สั่ง LOW แล้วรีเลย์ทำงาน สั่ง HIGH แล้วรีเลย์หยุด</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ตรวจ COM/NO รีเลย์โหลด</td>
+      <td>+24V เข้าที่ COM และออก NO ไปโหลด ไม่ใช้ NC ผิดวงจร</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ตรวจ Buzzer/Sounder</td>
+      <td>ถ้าเป็น 12/24V ต้องมีวงจรขับหรือรีเลย์ ไม่ต่อเข้าขา Arduino โดยตรง</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ตรวจป้ายหมายเลขสาย</td>
+      <td>หมายเลขสายตรงกับ Terminal Wiring Schedule ทุกเส้น</td>
+      <td></td>
+    </tr>
+  </table>
+
+  <h2>7. คำแนะนำการจัดเทอร์มินัลในตู้ควบคุม</h2>
+  <p>ตารางนี้เป็นตัวอย่างการจัดเทอร์มินัลเพื่อให้ซ่อมบำรุงง่าย หน้างานสามารถเปลี่ยนหมายเลขตามแบบไฟฟ้าจริงได้</p>
+  <table>
+    <tr>
+      <th>Terminal</th>
+      <th>ชื่อสัญญาณ</th>
+      <th>ต่อไปที่</th>
+      <th>หมายเหตุ</th>
+    </tr>
+    <tr>
+      <td>TB1-1</td>
+      <td>+5V Control</td>
+      <td>Arduino 5V, LCD VCC, Relay VCC</td>
+      <td>แยกฟิวส์ฝั่ง Control</td>
+    </tr>
+    <tr>
+      <td>TB1-2</td>
+      <td>0V Control</td>
+      <td>Arduino GND, LCD GND, Relay GND</td>
+      <td>ใช้เป็น Common ของสัญญาณ 5V</td>
+    </tr>
+    <tr>
+      <td>TB2-1</td>
+      <td>Door Sensor Signal</td>
+      <td>Arduino D2</td>
+      <td>สายจากเซนเซอร์ประตู</td>
+    </tr>
+    <tr>
+      <td>TB2-2</td>
+      <td>Door Sensor Common</td>
+      <td>GND</td>
+      <td>ประตูปิดต้องต่อ D2 ลง GND</td>
+    </tr>
+    <tr>
+      <td>TB3-1</td>
+      <td>+24V Load</td>
+      <td>COM ของรีเลย์ไฟเขียว/ไฟแดง</td>
+      <td>ผ่านฟิวส์โหลด</td>
+    </tr>
+    <tr>
+      <td>TB3-2</td>
+      <td>Green Lamp +</td>
+      <td>NO ของรีเลย์ไฟเขียวไปไฟเขียว</td>
+      <td>ไฟเขียวติดเมื่อระบบปกติ</td>
+    </tr>
+    <tr>
+      <td>TB3-3</td>
+      <td>Red Lamp +</td>
+      <td>NO ของรีเลย์ไฟแดงไปไฟแดง</td>
+      <td>ไฟแดงติดเมื่อ Alarm</td>
+    </tr>
+    <tr>
+      <td>TB3-4</td>
+      <td>24V 0V Load</td>
+      <td>ขั้วลบของไฟสัญญาณ</td>
+      <td>กลับแหล่งจ่าย 24VDC</td>
+    </tr>
+    <tr>
+      <td>TB4-1</td>
+      <td>BZ1 +</td>
+      <td>Arduino D10 หรือวงจรขับ</td>
+      <td>เลือกตามชนิดบัซเซอร์จริง</td>
+    </tr>
+  </table>
+
+  <h2>8. อธิบายโค้ด SECURITY_DOOR.ino</h2>
+  <h3>8.1 ไลบรารี</h3>
+  <pre>#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;</pre>
+  <p><b>Wire.h</b> ใช้สื่อสาร I2C ส่วน <b>LiquidCrystal_I2C.h</b> ใช้ควบคุมจอ LCD ผ่านโมดูล I2C</p>
+
+  <h3>8.2 การกำหนดขาและค่าคงที่</h3>
+  <pre>const byte DOOR_SENSOR_PIN = 2;
+const byte GREEN_LAMP_RELAY_PIN = 8;
+const byte RED_ALARM_RELAY_PIN = 9;
+const byte BUZZER_PIN = 10;
+
+const unsigned long ALARM_DELAY_MS = 5000;
+const byte RELAY_ON = LOW;
+const byte RELAY_OFF = HIGH;
+const byte DOOR_CLOSED_SENSOR_STATE = LOW;</pre>
+  <p>ส่วนนี้กำหนดขา I/O ทั้งหมด และกำหนดเวลาหน่วง Alarm เท่ากับ 5000 มิลลิวินาที หรือ 5 วินาที จุดสำคัญคือรีเลย์ถูกกำหนดให้ ON ด้วย LOW และประตูปิดถูกกำหนดให้เซนเซอร์อ่านได้ LOW</p>
+
+  <h3>8.3 ตัวแปรสถานะ</h3>
+  <table>
+    <tr>
+      <th>ตัวแปร</th>
+      <th>หน้าที่</th>
+    </tr>
+    <tr>
+      <td>stableDoorOpen</td>
+      <td>เก็บสถานะประตูจากการอ่าน D2 รอบปัจจุบัน: true = เปิด, false = ปิด</td>
+    </tr>
+    <tr>
+      <td>lastStableDoorOpen</td>
+      <td>เก็บสถานะประตูรอบก่อนหน้า เพื่อจับจังหวะที่ประตูเพิ่งเปลี่ยนจากปิดเป็นเปิด</td>
+    </tr>
+    <tr>
+      <td>alarmActive</td>
+      <td>เก็บสถานะ Alarm ภายในโค้ด ปัจจุบันใช้ควบคุมลอจิก แต่ยังไม่ได้นำไปแสดงบน LCD</td>
+    </tr>
+    <tr>
+      <td>doorOpenedTime</td>
+      <td>เก็บเวลา millis() ตอนที่เริ่มเปิดประตู</td>
+    </tr>
+    <tr>
+      <td>lastDebugTime</td>
+      <td>ใช้ควบคุมให้ Serial Debug แสดงผลทุก 1 วินาที</td>
+    </tr>
+    <tr>
+      <td>lastDisplayScreen</td>
+      <td>ใช้จำหน้าจอล่าสุด เพื่อลดการ clear LCD ซ้ำเมื่อสถานะไม่เปลี่ยน</td>
+    </tr>
+  </table>
+
+  <h3>8.4 setup()</h3>
+  <p>เมื่อเปิดระบบ โค้ดสั่งให้รีเลย์และบัซเซอร์อยู่ในสถานะปลอดภัยก่อน จากนั้นตั้งโหมดขา I/O เริ่ม Serial ที่ 9600 baud เปิด LCD แสดงข้อความ SYSTEM START เป็นเวลา 2 วินาที แล้วอ่านสถานะระบบครั้งแรก</p>
+  <pre>digitalWrite(GREEN_LAMP_RELAY_PIN, RELAY_OFF);
+digitalWrite(RED_ALARM_RELAY_PIN, RELAY_OFF);
+digitalWrite(BUZZER_PIN, LOW);
+
+pinMode(DOOR_SENSOR_PIN, INPUT_PULLUP);
+pinMode(GREEN_LAMP_RELAY_PIN, OUTPUT);
+pinMode(RED_ALARM_RELAY_PIN, OUTPUT);
+pinMode(BUZZER_PIN, OUTPUT);</pre>
+
+  <h3>8.5 loop()</h3>
+  <p>ฟังก์ชัน loop ทำงานซ้ำตลอดเวลา มี 3 งานหลัก คืออัปเดตสถานะระบบ อัปเดตหน้าจอ และพิมพ์สถานะ Debug ออก Serial Monitor</p>
+  <pre>void loop() {
+  updateSystemState();
+  updateDisplay(false);
+  printDebugStatus();
+}</pre>
+
+  <h3>8.6 updateSystemState()</h3>
+  <p>นี่คือหัวใจของโปรแกรม เริ่มจากอ่าน D2 แล้วเปรียบเทียบกับค่า LOW ที่นิยามว่าเป็นประตูปิด หากประตูปิด ระบบจะรีเซ็ตเวลาและปิด Alarm ทันที หากประตูเปิด ระบบจะจับเวลาเมื่อเริ่มเปิดครั้งแรก แล้วตรวจว่าครบ 5 วินาทีหรือยัง</p>
+  <table>
+    <tr>
+      <th>ขั้นตอน</th>
+      <th>คำอธิบาย</th>
+    </tr>
+    <tr>
+      <td>อ่านเซนเซอร์</td>
+      <td>stableDoorOpen = digitalRead(D2) != LOW ดังนั้น D2 = HIGH จะถือว่าประตูเปิด</td>
+    </tr>
+    <tr>
+      <td>ถ้าประตูปิด</td>
+      <td>ตั้ง doorOpenedTime = 0, alarmActive = false แล้วเรียก setDoorClosedOutputs()</td>
+    </tr>
+    <tr>
+      <td>ถ้าเพิ่งเปิด</td>
+      <td>เมื่อรอบก่อนยังไม่เปิด แต่รอบนี้เปิด ให้บันทึกเวลาเริ่มเปิดด้วย millis()</td>
+    </tr>
+    <tr>
+      <td>คำนวณเวลาที่เปิด</td>
+      <td>openDuration = millis() - doorOpenedTime</td>
+    </tr>
+    <tr>
+      <td>ยังไม่ครบ 5 วินาที</td>
+      <td>เรียก setDoorOpenWaitingOutputs(): ไฟเขียวยังติด ไฟแดงดับ บัซเซอร์เงียบ</td>
+    </tr>
+    <tr>
+      <td>ครบ 5 วินาทีขึ้นไป</td>
+      <td>เรียก setAlarmOutputs(): ไฟเขียวดับ ไฟแดงติด บัซเซอร์ดัง 2000 Hz</td>
+    </tr>
+  </table>
+
+  <h3>8.7 ฟังก์ชันควบคุมเอาต์พุต</h3>
+  <table>
+    <tr>
+      <th>ฟังก์ชัน</th>
+      <th>ผลลัพธ์</th>
+    </tr>
+    <tr>
+      <td>setDoorClosedOutputs()</td>
+      <td>เปิดไฟเขียว ปิดไฟแดง ปิดบัซเซอร์ เหมาะกับสถานะประตูปิดปกติ</td>
+    </tr>
+    <tr>
+      <td>setDoorOpenWaitingOutputs()</td>
+      <td>เปิดไฟเขียว ปิดไฟแดง ปิดบัซเซอร์ ระหว่างรอครบ 5 วินาทีหลังเปิดประตู</td>
+    </tr>
+    <tr>
+      <td>setAlarmOutputs()</td>
+      <td>ปิดไฟเขียว เปิดไฟแดง และเปิดเสียง tone 2000 Hz ที่ขา D10</td>
+    </tr>
+  </table>
+
+  <h3>8.8 updateDisplay()</h3>
+  <p>ฟังก์ชันนี้เลือกหน้าจอจากสถานะประตู หากประตูเปิดจะแสดง DR.OPEN หากปิดจะแสดง DR.CLOSE และมีการจำหน้าจอล่าสุดเพื่อไม่ให้ clear LCD ตลอดเวลา ลดการกระพริบของจอ</p>
+
+  <h3>8.9 printDebugStatus()</h3>
+  <p>ฟังก์ชันนี้พิมพ์สถานะออก Serial Monitor ทุก 1 วินาที ที่ความเร็ว 9600 baud ตัวอย่างข้อความที่คาดว่าจะเห็น:</p>
+  <pre>STATUS = DR.CLOSE | D2 = 0
+STATUS = DR.OPEN | D2 = 1</pre>
+
+  <h2>9. Sequence การทำงาน</h2>
+  <pre>Power ON
+  -> ตั้งค่าเอาต์พุตให้อยู่ OFF ก่อน
+  -> เริ่ม LCD และแสดง SYSTEM START 2 วินาที
+  -> อ่านสถานะประตู
+
+ระหว่างทำงานปกติ:
+  -> อ่าน D2
+  -> ถ้า D2 = LOW: ประตูปิด, ไฟเขียว ON, ไฟแดง OFF, บัซเซอร์ OFF
+  -> ถ้า D2 = HIGH: ประตูเปิด, เริ่มจับเวลา
+       -> ถ้ายังไม่ครบ 5 วินาที: ไฟเขียว ON, ไฟแดง OFF, บัซเซอร์ OFF
+       -> ถ้าครบ 5 วินาที: ไฟเขียว OFF, ไฟแดง ON, บัซเซอร์ ON
+  -> ถ้าปิดประตูกลับ: รีเซ็ตเวลาและ Alarm ทันที</pre>
+
+  <h2>10. ขั้นตอนทดสอบและ Commissioning หน้างาน</h2>
+  <table>
+    <tr>
+      <th>ลำดับ</th>
+      <th>ขั้นตอนทดสอบ</th>
+      <th>ผลที่ต้องได้</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>ตรวจสายทั้งหมดด้วยมิเตอร์ก่อนจ่ายไฟ โดยเฉพาะ 5V, 24V, GND และโหลดไฟสัญญาณ</td>
+      <td>ไม่มีลัดวงจร ขั้วไฟถูกต้อง</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>จ่ายไฟ 5V ให้ Arduino และ LCD</td>
+      <td>LCD แสดง SYSTEM START แล้วเปลี่ยนเป็น STATUS</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>เปิด Serial Monitor ที่ 9600 baud</td>
+      <td>เห็นข้อความ STATUS ทุก 1 วินาที</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>ปิดประตูให้เซนเซอร์ทำงาน</td>
+      <td>Serial แสดง D2 = 0, LCD แสดง DR.CLOSE, ไฟเขียวติด, ไฟแดงดับ, บัซเซอร์เงียบ</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>เปิดประตูแล้วปิดภายใน 5 วินาที</td>
+      <td>LCD แสดง DR.OPEN ระหว่างเปิด แต่ไฟแดงและบัซเซอร์ยังไม่ทำงาน</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>เปิดประตูค้างเกิน 5 วินาที</td>
+      <td>ไฟเขียวดับ ไฟแดงติด บัซเซอร์ดัง</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>ปิดประตูกลับ</td>
+      <td>Alarm หยุดทันที ไฟเขียวกลับมาติด และ LCD แสดง DR.CLOSE</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>จำลองสายเซนเซอร์หลุดจาก D2</td>
+      <td>ระบบควรอ่านเป็นประตูเปิด และ Alarm หลังครบ 5 วินาที</td>
+    </tr>
+  </table>
+
+  <h2>11. การแก้ปัญหาเบื้องต้น</h2>
+  <table>
+    <tr>
+      <th>อาการ</th>
+      <th>สาเหตุที่เป็นไปได้</th>
+      <th>วิธีตรวจสอบ/แก้ไข</th>
+    </tr>
+    <tr>
+      <td>LCD ไม่ขึ้นหรือขึ้นช่องสี่เหลี่ยม</td>
+      <td>ไฟเลี้ยง LCD ผิด, SDA/SCL สลับ, Address ไม่ใช่ 0x27, Contrast ไม่เหมาะ</td>
+      <td>วัด 5V/GND, ตรวจสาย A4/A5, ใช้ I2C Scanner, ปรับ VR หลังจอ</td>
+    </tr>
+    <tr>
+      <td>ประตูปิดแต่แสดง DR.OPEN</td>
+      <td>ใช้หน้าสัมผัสเซนเซอร์ผิดชนิด หรือสาย D2/GND ไม่ถูก</td>
+      <td>เปิด Serial Monitor ดูค่า D2: ประตูปิดต้องได้ 0 หากไม่ได้ให้เปลี่ยน Contact หรือแก้ DOOR_CLOSED_SENSOR_STATE</td>
+    </tr>
+    <tr>
+      <td>รีเลย์ทำงานกลับด้าน</td>
+      <td>รีเลย์โมดูลเป็น Active HIGH ไม่ใช่ Active LOW</td>
+      <td>เปลี่ยนโมดูล หรือแก้ RELAY_ON/RELAY_OFF ในโค้ด</td>
+    </tr>
+    <tr>
+      <td>ไฟแดงไม่ติดเมื่อ Alarm</td>
+      <td>สาย D9, รีเลย์, ฟิวส์, 24V หรือหลอดไฟผิดปกติ</td>
+      <td>วัดแรงดันที่ D9, IN รีเลย์, COM/NO และขั้วไฟแดงตามลำดับ</td>
+    </tr>
+    <tr>
+      <td>บัซเซอร์ไม่ดัง</td>
+      <td>ชนิดบัซเซอร์ไม่เหมาะกับ tone, กระแสไม่พอ, ต่อขั้วผิด</td>
+      <td>ทดสอบบัซเซอร์แยก ตรวจว่าต้องใช้ Active Buzzer หรือ Passive Piezo และใช้วงจรขับหากเป็นโหลด 12/24V</td>
+    </tr>
+    <tr>
+      <td>Alarm ติดๆ ดับๆ หรือแจ้งเตือนเอง</td>
+      <td>สายเซนเซอร์ยาว เกิด Noise, หน้าสัมผัสเด้ง, แม่เหล็กเยื้อง</td>
+      <td>เดินสายแยกจากสายกำลัง ใช้สายชีลด์ ตรวจระยะเซนเซอร์ และพิจารณาเพิ่ม Debounce ในโค้ด</td>
+    </tr>
+  </table>
+
+  <h2>12. ข้อควรปรับปรุงก่อนใช้งานจริงระยะยาว</h2>
+  <p>1. เพิ่ม Debounce ให้ Door Sensor เพราะตัวแปรชื่อ stableDoorOpen แต่โค้ดปัจจุบันอ่านค่าจาก D2 โดยตรง ยังไม่มีการกรองสัญญาณเด้งหรือ Noise</p>
+  <p>2. เพิ่มข้อความ Alarm บน LCD เช่น DR.OPEN WAIT หรือ ALARM เพื่อให้ผู้ใช้งานแยกสถานะเปิดประตูปกติกับเปิดค้างเกินเวลาได้ง่ายขึ้น</p>
+  <p>3. เพิ่มปุ่ม Acknowledge หรือ Silence หากต้องการให้ช่างหยุดเสียงชั่วคราวโดยยังคงไฟแดงไว้</p>
+  <p>4. ใช้ตู้ควบคุมและอุปกรณ์ภาคสนามที่มีพิกัด IP และอุณหภูมิเหมาะกับสภาพโรงงานจริง</p>
+  <p>5. ใช้ฟิวส์หรือเบรกเกอร์ย่อยแยกสำหรับวงจร Control 5V และ Load 24V เพื่อให้ตรวจซ่อมง่ายและลดความเสียหายเมื่อเกิด Fault</p>
+
+  <h2>13. แผนบำรุงรักษาเชิงป้องกัน</h2>
+  <table>
+    <tr>
+      <th>ความถี่</th>
+      <th>งานที่ต้องตรวจ</th>
+      <th>เกณฑ์ผ่าน</th>
+    </tr>
+    <tr>
+      <td>รายวัน/ก่อนเริ่มกะ</td>
+      <td>เปิด-ปิดประตูทดสอบไฟเขียว ไฟแดง และบัซเซอร์</td>
+      <td>ทำงานตรงตาม Sequence และ Alarm เมื่อเปิดค้างเกิน 5 วินาที</td>
+    </tr>
+    <tr>
+      <td>รายเดือน</td>
+      <td>ตรวจระยะ Door Sensor, ความแน่นของเทอร์มินัล, สภาพสาย และฝุ่นในตู้</td>
+      <td>ไม่มีสายหลวม ไม่มีสนิม ไม่มีฉนวนชำรุด</td>
+    </tr>
+    <tr>
+      <td>ราย 6 เดือน</td>
+      <td>ตรวจพิกัดและสภาพหน้าสัมผัสรีเลย์ ฟิวส์ แหล่งจ่าย 5V/24V</td>
+      <td>แรงดันอยู่ในเกณฑ์ โหลดไม่ร้อนผิดปกติ รีเลย์ไม่ค้าง</td>
+    </tr>
+    <tr>
+      <td>หลังซ่อม/ย้ายตำแหน่ง</td>
+      <td>ทำ Commissioning ตามหัวข้อ 10 ใหม่ทั้งหมด</td>
+      <td>บันทึกผลทดสอบครบและผู้รับผิดชอบลงชื่อ</td>
+    </tr>
+  </table>
+
+  <h2>14. สรุปค่าหลักจากโปรแกรม</h2>
+  <table>
+    <tr>
+      <th>รายการ</th>
+      <th>ค่า</th>
+    </tr>
+    <tr>
+      <td>เวลาหน่วงก่อน Alarm</td>
+      <td>5000 ms หรือ 5 วินาที</td>
+    </tr>
+    <tr>
+      <td>สถานะประตูปิด</td>
+      <td>D2 = LOW</td>
+    </tr>
+    <tr>
+      <td>รีเลย์ทำงาน</td>
+      <td>LOW = ON</td>
+    </tr>
+    <tr>
+      <td>LCD Address</td>
+      <td>0x27</td>
+    </tr>
+    <tr>
+      <td>LCD Size</td>
+      <td>16x2</td>
+    </tr>
+    <tr>
+      <td>Serial Monitor</td>
+      <td>9600 baud</td>
+    </tr>
+    <tr>
+      <td>ความถี่เสียงเตือน</td>
+      <td>2000 Hz</td>
+    </tr>
+  </table>
+
+  <h2>15. แบบฟอร์มบันทึกผลทดสอบ</h2>
+  <table>
+    <tr>
+      <th>รายการทดสอบ</th>
+      <th>ผลที่คาดหวัง</th>
+      <th>ผ่าน/ไม่ผ่าน</th>
+      <th>หมายเหตุ</th>
+    </tr>
+    <tr>
+      <td>Power ON</td>
+      <td>LCD แสดง SYSTEM START</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ประตูปิด</td>
+      <td>DR.CLOSE, D2 = 0, ไฟเขียว ON</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>เปิดประตูน้อยกว่า 5 วินาที</td>
+      <td>DR.OPEN, ไฟเขียวยัง ON, ไม่มีเสียง</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>เปิดประตูเกิน 5 วินาที</td>
+      <td>ไฟแดง ON, บัซเซอร์ ON, ไฟเขียว OFF</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ปิดประตูกลับ</td>
+      <td>Alarm หยุดและกลับสู่ DR.CLOSE</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</body>
+</html>
